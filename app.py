@@ -17,7 +17,7 @@ tokens = nltk.word_tokenize(paradise)
 @app.route('/get_prefixes', methods=['GET'])
 def get_prefixes():
     try:
-        n = int(request.args.get('n', 2)) 
+        n = int(request.args.get('n', 2))  
         if n < 2:
             return jsonify({"prefixes": []})
 
@@ -202,3 +202,5 @@ def line_gen(tokens, freq, freqm1, givenwords, senlen, n):
 
     return " ".join(sentence)
 
+if __name__ == '__main__':
+    app.run(debug=True)
