@@ -16,9 +16,8 @@ tokens = nltk.word_tokenize(paradise)
 
 @app.route('/get_prefixes', methods=['GET'])
 def get_prefixes():
-    """Dynamically fetch top 10 (n-1)-grams based on n-value"""
     try:
-        n = int(request.args.get('n', 2))  # Default to bigrams
+        n = int(request.args.get('n', 2)) 
         if n < 2:
             return jsonify({"prefixes": []})
 
@@ -33,16 +32,14 @@ def home():
     generated_sentence = ""
     error_message = ""
 
-    # Initialize form fields with empty strings
     n_value = ""
     prefix_value = ""
     length_value = ""
 
     if request.method == 'POST':
-        if request.form.get('reset'):  # If Reset button is clicked
+        if request.form.get('reset'): 
             return render_template_string(TEMPLATE, generated_sentence="", error_message="", n_value="", prefix_value="", length_value="")
 
-        # Handle Generate button click
         n_value = request.form.get('n', '')
         prefix_value = request.form.get('prefix', '')
         length_value = request.form.get('length', '')
@@ -67,7 +64,7 @@ def home():
     return render_template_string(TEMPLATE, generated_sentence=generated_sentence, error_message=error_message,
                                   n_value=n_value, prefix_value=prefix_value, length_value=length_value)
 
-# HTML Template String
+
 TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -180,7 +177,7 @@ TEMPLATE = '''
 </html>
 '''
 
-# Function to generate a sentence
+
 def line_gen(tokens, freq, freqm1, givenwords, senlen, n):
     vocab = set(tokens)
     vocab_size = len(vocab)
@@ -205,5 +202,3 @@ def line_gen(tokens, freq, freqm1, givenwords, senlen, n):
 
     return " ".join(sentence)
 
-if __name__ == '__main__':
-    app.run(debug=True)
