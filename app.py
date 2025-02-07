@@ -8,7 +8,7 @@ from collections import Counter
 app = Flask(__name__)
 nltk.data.path.append("/tmp")
 nltk.download('gutenberg', download_dir='/tmp')
-nltk.download('punkt', download_dir='/tmp')
+nltk.download('punkt_tab', download_dir='/tmp')
 paradise = gutenberg.raw('milton-paradise.txt').lower()
 paradise = re.sub(r'[^\w\s]', ' ', paradise)
 tokens = nltk.word_tokenize(paradise)
