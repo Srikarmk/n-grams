@@ -6,10 +6,9 @@ from nltk.util import ngrams
 from collections import Counter
 
 app = Flask(__name__)
-
-# Load and preprocess the text
-nltk.download('gutenberg')
-nltk.download('punkt')
+nltk.data.path.append("/tmp")
+nltk.download('gutenberg', download_dir='/tmp')
+nltk.download('punkt', download_dir='/tmp')
 paradise = gutenberg.raw('milton-paradise.txt').lower()
 paradise = re.sub(r'[^\w\s]', ' ', paradise)
 tokens = nltk.word_tokenize(paradise)
